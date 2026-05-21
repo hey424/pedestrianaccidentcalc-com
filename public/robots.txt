@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pedestrianaccidentcalc.com/sitemap-index.xml

@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const title = 'Pedestrian Accident Settlement Calculator | pedestrianaccidentcalc.com';
+const description = 'Estimate potential settlement value for a pedestrian accident injury claim. Covers medical costs, lost wages, pain and suffering, and comparative fault. Free, informational.';
+---
+<BaseLayout title={title} description={description}>
+  <h1>Pedestrian Accident Settlement Calculator</h1>
+  <p><em>Reviewed by Aspen Lockwood (AL), Editor-in-Chief. Updated May 2026.</em></p>
+  <p>Pedestrians struck by vehicles suffer some of the most severe injuries in personal injury law. With no protection other than their own body, pedestrians face catastrophic outcomes: traumatic brain injuries, spinal cord injuries, multiple fractures, and fatalities. Average pedestrian accident settlements are substantially higher than typical car accident claims. This calculator estimates potential recovery.</p>
+  <h2>Run the estimate</h2>
+  <form id="calc" novalidate>
+    <label for="medical-costs">Medical costs (USD — ER, surgery, hospitalization, rehab, future care)</label>
+    <input id="medical-costs" type="number" value="50000" min="0" />
+    <label for="lost-wages">Lost wages (USD)</label>
+    <input id="lost-wages" type="number" value="10000" min="0" />
+    <label for="severity">Injury severity</label>
+    <select id="severity">
+      <option value="catastrophic">Catastrophic — TBI, spinal cord injury, amputation, permanent disability</option>
+      <option value="severe">Severe — multiple fractures, surgery required, extended hospitalization</option>
+      <option value="moderate">Moderate — fractures, soft tissue injuries requiring treatment</option>
+      <option value="minor">Minor — soft tissue, cuts, bruising</option>
+    </select>
+    <label for="fault">Pedestrian fault percentage (comparative negligence)</label>
+    <select id="fault">
+      <option value="0">0% — driver fully at fault (ran red light, crosswalk violation, DUI)</option>
+      <option value="10">~10% — pedestrian slightly inattentive</option>
+      <option value="25">~25% — pedestrian jaywalking or crossing outside crosswalk</option>
+      <option value="50">~50% — shared fault (both contributed equally)</option>
+    </select>
+    <label for="state-rule">Your state&rsquo;s fault rule</label>
+    <select id="state-rule">
+      <option value="pure-comparative">Pure comparative fault (CA, NY, FL — recover even at 99% fault)</option>
+      <option value="modified-comparative">Modified comparative fault (most states — bar at 50% or 51%)</option>
+      <option value="contributory">Contributory negligence (AL, DC, MD, NC, VA — any fault bars recovery)</option>
+    </select>
+    <button type="submit">Estimate settlement</button>
+  </form>
+  <p id="result" aria-live="polite"></p>
+  <h2>How pedestrian accident claims work</h2>
+  <p>Pedestrian accident claims follow the same personal injury framework as car accident claims, but with higher damages due to the severity of injuries. The driver&rsquo;s auto insurance (bodily injury liability) is the primary recovery source. If the driver is uninsured or underinsured, the pedestrian&rsquo;s own uninsured motorist (UM/UIM) coverage applies. Pedestrians struck on crosswalks with green lights or by DUI drivers typically face minimal comparative fault issues.</p>
+  <h2>Where to learn more</h2>
+  <p>See <a href="/guides/how-pedestrian-accident-claims-work">how pedestrian accident claims work</a>, <a href="/guides/pedestrian-accident-fault">pedestrian accident fault and comparative negligence</a>, <a href="/guides/what-to-do-after-pedestrian-accident">what to do after a pedestrian accident</a>, and <a href="/guides/pedestrian-accident-misconceptions">common misconceptions</a>.</p>
+  <script>
+    document.getElementById('calc').addEventListener('submit', e => {
+      e.preventDefault();
+      const medCosts = parseFloat(document.getElementById('medical-costs').value)||0;
+      const lostWages = parseFloat(document.getElementById('lost-wages').value)||0;
+      const severity = document.getElementById('severity').value;
+      const faultPct = parseFloat(document.getElementById('fault').value)||0;
+      const stateRule = document.getElementById('state-rule').value;
+      // Contributory negligence bar
+      if (stateRule==='contributory' && faultPct>0) {
+        document.getElementById('result').innerHTML = '<strong>Recovery likely barred</strong><br>Your state uses contributory negligence — any fault by the pedestrian bars recovery entirely. Alabama, DC, Maryland, North Carolina, and Virginia use this rule.<br><em>Consult an attorney — there are sometimes exceptions for last clear chance doctrine.</em>';
+        return;
+      }
+      // Modified comparative bar at 50%
+      if (stateRule==='modified-comparative' && faultPct>=50) {
+        document.getElementById('result').innerHTML = '<strong>Recovery likely barred</strong><br>Most modified comparative fault states bar recovery when the plaintiff is 50% or more at fault.<br><em>Consult a personal injury attorney — exact threshold varies by state.</em>';
+        return;
+      }
+      const multiplier = {catastrophic:7,severe:5,moderate:3.5,minor:2}[severity];
+      const painSuffering = (medCosts * multiplier) + (lostWages * 2);
+      const grossTotal = medCosts + lostWages + painSuffering;
+      const netTotal = grossTotal * (1 - faultPct/100);
+      const fmt = n=>'$'+Math.round(n).toLocaleString();
+      document.getElementById('result').innerHTML =
+        `<strong>Estimated range: ${fmt(netTotal*0.6)} &ndash; ${fmt(netTotal*1.3)}</strong><br>Gross damages: ${fmt(grossTotal)} &bull; Fault reduction (${faultPct}%): ${fmt(grossTotal*faultPct/100)} &bull; Net: ${fmt(netTotal)}<br><em>Insurance policy limits often cap recovery. Uninsured/underinsured coverage and umbrella policies may provide additional layers.</em>`;
+    });
+  </script>
+</BaseLayout>

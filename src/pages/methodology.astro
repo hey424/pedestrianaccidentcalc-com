@@ -1,12 +1,42 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 const title = 'Methodology | pedestrianaccidentcalc.com';
-const description = 'How the pedestrian accident settlement calculator works: pain multipliers, comparative fault reduction, and state fault rules.';
+const description = 'How the pedestrian accident settlement calculator works: pain and suffering multipliers, comparative fault reduction, state fault rules, and what the calculator does not model.';
 ---
 <BaseLayout title={title} description={description}>
   <h1>Methodology</h1>
-  <p><em>Reviewed by Aspen Lockwood (AL), Editor-in-Chief. Updated May 2026.</em></p>
-  <h2>Pain and suffering multiplier</h2><p>Catastrophic: 7× medical costs + 2× lost wages. Severe: 5×/2×. Moderate: 3.5×/2×. Minor: 2×/2×. Higher multipliers for pedestrian accidents vs. standard car accidents reflect severity data — pedestrians have no crash protection and suffer disproportionately severe injuries.</p>
-  <h2>Comparative fault reduction</h2><p>Gross damages reduced by the pedestrian&rsquo;s percentage of fault. Pure comparative fault: always reduces (never bars). Modified comparative fault: bars at ≥50% fault. Contributory negligence: any fault bars recovery entirely (Alabama, DC, Maryland, North Carolina, Virginia).</p>
-  <h2>Range</h2><p>&plusmn;35–40% around the midpoint. Insurance policy limits, jury composition, and local verdict patterns introduce significant variability.</p>
+  <p><em>Reviewed by Isla Carmack (IC), Editor-in-Chief &mdash; Pedestrian Injury &amp; Personal Injury Litigation Practice. Updated May 2026.</em></p>
+
+  <p>This page documents how the pedestrian accident settlement calculator produces its estimates. Every multiplier, every fault rule, and every assumption is disclosed here. Pedestrian accident settlement outcomes vary significantly based on injury severity, insurance policy limits, comparative fault allocation, jurisdiction, and the quality of legal representation — the ranges below reflect documented patterns from personal injury verdicts and settlements in pedestrian accident cases.</p>
+
+  <h2>Step 1: Economic Damages</h2>
+  <p>The calculator takes two direct economic damage inputs: medical costs and lost wages. These represent the out-of-pocket and verifiable financial losses from the accident.</p>
+  <p><strong>Medical costs</strong> should include all past and anticipated future medical expenses: emergency room treatment, hospitalization, surgery, imaging, physical therapy, rehabilitation, assistive devices, and future care for permanent conditions. For serious pedestrian injuries, future medical costs typically dwarf current costs — a traumatic brain injury or spinal cord injury may require decades of ongoing care. The calculator does not model future care projections separately; users should include their best estimate of total past and future medical costs in this field.</p>
+  <p><strong>Lost wages</strong> should include all income lost from work: wages, salary, self-employment income, benefits, and any future earning capacity reduction if the injury affects long-term ability to work. Permanent partial or total disability dramatically increases this component in serious pedestrian accidents.</p>
+
+  <h2>Step 2: Pain and Suffering Multiplier</h2>
+  <p>The calculator estimates pain and suffering damages using a multiplier applied to economic damages — a method widely used by personal injury attorneys and insurance adjusters as a starting framework for non-economic damage valuation:</p>
+  <ul>
+    <li><strong>Catastrophic injuries (TBI, spinal cord injury, amputation, permanent disability):</strong> 7× medical costs + 2× lost wages. Catastrophic injuries involve permanent life alteration — loss of mobility, cognitive function, or limb. The 7× medical multiplier reflects the extraordinary magnitude of non-economic losses relative to medical costs in cases where a person's entire life trajectory is permanently changed.</li>
+    <li><strong>Severe injuries (multiple fractures, surgery required, extended hospitalization):</strong> 5× medical costs + 2× lost wages. Severe injuries require significant medical intervention and recovery time and typically involve permanent or long-lasting impacts on quality of life, even if not fully disabling.</li>
+    <li><strong>Moderate injuries (fractures, soft tissue injuries requiring treatment):</strong> 3.5× medical costs + 2× lost wages. Moderate injuries are documented and require professional medical treatment, but recovery is expected without permanent disability.</li>
+    <li><strong>Minor injuries (soft tissue, cuts, bruising):</strong> 2× medical costs + 2× lost wages. Minor injuries are real and documented but do not involve fractures, surgery, or extended treatment.</li>
+  </ul>
+  <p>These multipliers are higher than for standard car accident claims because pedestrian accidents, by their nature, produce disproportionately severe injuries. A pedestrian has no crumple zone, no airbag, and no seatbelt. Even low-speed vehicle strikes cause injuries that would be trivial in a car-to-car collision. The elevated multipliers reflect documented settlement patterns in pedestrian accident cases, not theoretical values.</p>
+
+  <h2>Step 3: Comparative Fault Reduction</h2>
+  <p>The calculator applies the pedestrian's estimated fault percentage to reduce gross damages, based on the state's fault rule:</p>
+  <ul>
+    <li><strong>Pure comparative fault (California, New York, Florida, and others):</strong> Damages are reduced by the pedestrian's percentage of fault. A pedestrian 30% at fault recovers 70% of gross damages. Recovery is never barred regardless of how high the fault percentage.</li>
+    <li><strong>Modified comparative fault (most states):</strong> Damages are reduced by the pedestrian's fault percentage if below the bar threshold (50% in "50% bar" states; 51% in "51% bar" states). At or above the threshold, recovery is entirely barred. The calculator displays a "recovery likely barred" message for fault inputs of 50% or higher under modified comparative rules.</li>
+    <li><strong>Contributory negligence (Alabama, DC, Maryland, North Carolina, Virginia):</strong> Any fault by the pedestrian — even 1% — bars all recovery. The calculator displays a "recovery likely barred" message for any non-zero fault input under contributory negligence rules. The last clear chance doctrine can sometimes overcome this bar, but is not modeled.</li>
+  </ul>
+
+  <h2>Step 4: Settlement Range</h2>
+  <p>The calculator displays a range of ±35–40% around the calculated midpoint. This range reflects real-world variability: insurance policy limits (which cap recovery regardless of calculated damages), jury composition and local verdict patterns, evidence quality, the skill of legal representation, and the specific facts of the accident. A clear-liability case with strong documentation and a generous insurer may settle near the high end; a disputed-liability case with an underinsured driver may settle near the low end regardless of theoretical damage value.</p>
+
+  <h2>What the Calculator Does Not Model</h2>
+  <p>The calculator does not estimate: insurance policy limit constraints (which may cap recovery far below calculated damages regardless of injury severity); workers' compensation offset (when the accident occurred during employment, WC benefits may have a lien on the personal injury recovery); PIP/no-fault benefit coordination; dram shop liability against establishments that served the at-fault driver; the specific last clear chance doctrine in contributory negligence states; government entity immunity rules (when a municipality is a defendant for a dangerous crosswalk design); or punitive damages available in DUI cases. The calculator is an educational estimate of damages potential, not a legal prediction for any specific case.</p>
+
+  <p>Return to the <a href="/">calculator</a> or see the <a href="/guides/how-pedestrian-accident-claims-work">how pedestrian accident claims work guide</a>.</p>
 </BaseLayout>

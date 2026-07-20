@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LeadCapture from '../components/LeadCapture.astro';
 const title = 'Pedestrian Accident Settlement Calculator | pedestrianaccidentcalc.com';
 const description = 'Estimate potential settlement value for a pedestrian accident injury claim. Covers medical costs, lost wages, pain and suffering, and comparative fault. Free, informational.';
 ---
@@ -35,13 +36,16 @@ const description = 'Estimate potential settlement value for a pedestrian accide
     </select>
     <button type="submit">Estimate settlement</button>
   </form>
-  <p id="result" aria-live="polite"></p>
+  
+
+  <LeadCapture caseType="pedestrian_accident" caseTypeLabel="Pedestrian Accident" />
+<p id="result" aria-live="polite"></p>
   <h2>How pedestrian accident claims work</h2>
   <p>Pedestrian accident claims follow the same personal injury framework as car accident claims, but with higher damages due to the severity of injuries. The driver's auto insurance bodily injury liability (BIL) coverage is the primary recovery source. If the driver is uninsured or underinsured, the pedestrian's own uninsured motorist (UM/UIM) coverage applies — and it applies even though the pedestrian was on foot, not in a vehicle. Pedestrians struck in crosswalks with green signals or by DUI drivers typically face minimal comparative fault issues, producing the strongest liability positions in this category of claims.</p>
   <h2>The pain and suffering multiplier</h2>
-  <p>The calculator applies multipliers to medical costs and lost wages to estimate non-economic damages (pain, suffering, loss of enjoyment of life, permanent disability). The multipliers for pedestrian accidents are higher than for standard car accident claims because pedestrian injury severity is systematically higher — pedestrians have no crash protection. Catastrophic injuries use a 7× medical multiplier; severe injuries use 5×; moderate injuries 3.5×; minor injuries 2×. The <a href="/methodology">methodology page</a> documents the full basis for these figures.</p>
+  <p>The calculator applies multipliers to medical costs and lost wages to estimate non-economic damages (pain, suffering, loss of enjoyment of life, permanent disability). The multipliers for pedestrian accidents are higher than for standard car accident claims because pedestrian injury severity is systematically higher — pedestrians have no crash protection. Catastrophic injuries use a 7× medical multiplier; severe injuries use 5×; moderate injuries 3.5×; minor injuries 2×. The <a href="/methodology/">methodology page</a> documents the full basis for these figures.</p>
   <h2>Where to learn more</h2>
-  <p>See <a href="/guides/how-pedestrian-accident-claims-work">how pedestrian accident claims work</a>, <a href="/guides/pedestrian-accident-fault">pedestrian accident fault and comparative negligence</a>, <a href="/guides/what-to-do-after-pedestrian-accident">what to do after a pedestrian accident</a>, and <a href="/guides/pedestrian-accident-misconceptions">common misconceptions</a>.</p>
+  <p>See <a href="/guides/how-pedestrian-accident-claims-work/">how pedestrian accident claims work</a>, <a href="/guides/pedestrian-accident-fault/">pedestrian accident fault and comparative negligence</a>, <a href="/guides/what-to-do-after-pedestrian-accident/">what to do after a pedestrian accident</a>, and <a href="/guides/pedestrian-accident-misconceptions/">common misconceptions</a>.</p>
   <script>
     document.getElementById('calc').addEventListener('submit', e => {
       e.preventDefault();
